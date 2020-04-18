@@ -2,11 +2,12 @@ package com.almacen.app.models;
 
 public class OrderDetail {
 
-	private Long idOrder;
+	private Long idOrderDetail;
 	private ProviderByProduct idProviderProduct;
 	private Integer quantityIn;
 	private Double priceByProduct;
 	private Double totalOrder;
+	private Order idOrder;
 	
 	public OrderDetail() {
 		super();
@@ -14,20 +15,21 @@ public class OrderDetail {
 	}
 
 	public OrderDetail(ProviderByProduct idProviderProduct, Integer quantityIn, Double priceByProduct,
-			Double totalOrder) {
+			Double totalOrder, Order idOrder) {
 		super();
 		this.idProviderProduct = idProviderProduct;
 		this.quantityIn = quantityIn;
 		this.priceByProduct = priceByProduct;
 		this.totalOrder = totalOrder;
-	}
-
-	public Long getIdOrder() {
-		return idOrder;
-	}
-
-	public void setIdOrder(Long idOrder) {
 		this.idOrder = idOrder;
+	}
+
+	public Long getIdOrderDetail() {
+		return idOrderDetail;
+	}
+
+	public void setIdOrderDetail(Long idOrderDetail) {
+		this.idOrderDetail = idOrderDetail;
 	}
 
 	public ProviderByProduct getIdProviderProduct() {
@@ -61,6 +63,16 @@ public class OrderDetail {
 	public void setTotalOrder(Double totalOrder) {
 		this.totalOrder = totalOrder;
 	}
+
+	public Order getIdOrder() {
+		return idOrder;
+	}
+
+	public void setIdOrder(Order idOrder) {
+		this.idOrder = idOrder;
+	}
+
+
 	
 	
 	

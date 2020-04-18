@@ -22,8 +22,7 @@ public class BranchDAO {
 	}
 
 
-
-
+	
 	public List<Branch> list(){
 	
 		String sql = "SELECT * FROM BRANCH";

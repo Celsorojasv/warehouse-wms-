@@ -6,21 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.almacen.app.DAO.BranchDAO;
-import com.almacen.app.models.Branch;
+import com.almacen.app.DAO.CategoryDAO;
+import com.almacen.app.models.Category;
 
 @RestController
-public class BranchController {
-
-	@Autowired
-	private BranchDAO service;
-
-	// http://localhost:8090/listBranch
+public class CategoryController {
 	
-	@GetMapping("/listBranch")
-	public List<Branch> branches() {
+	@Autowired
+	private CategoryDAO service;
+	
+	// http://localhost:8090/listCategory
+	
+	@GetMapping("/listCategory")
+	public List<Category> categories(){
 		
 		return service.list();
 	}
+	
+	
 
 }

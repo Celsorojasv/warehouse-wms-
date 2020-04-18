@@ -7,6 +7,7 @@ public class Product {
 	private Long idProduct;
 	private String nameProduct;
 	private Date createdProduct;
+	private Category idCategory;
 	
 
 	public Product() {
@@ -15,11 +16,13 @@ public class Product {
 	}
 
 
-	public Product(String nameProduct, Date createdProduct) {
+	public Product(String nameProduct, Date createdProduct, Category idCategory) {
 		super();
 		this.nameProduct = nameProduct;
 		this.createdProduct = createdProduct;
+		this.idCategory = idCategory;
 	}
+
 
 
 	public Long getIdProduct() {
@@ -49,6 +52,18 @@ public class Product {
 
 	public void setCreatedProduct(Date createdProduct) {
 		this.createdProduct = createdProduct;
+	}
+
+
+
+	public Category getIdCategory() {
+		return idCategory;
+	}
+
+
+
+	public void setIdCategory(Category idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	

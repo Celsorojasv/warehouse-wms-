@@ -1,10 +1,3 @@
--- Generado por Oracle SQL Developer Data Modeler 19.4.0.350.1424
---   en:        2020-04-16 22:13:32 CST
---   sitio:      Oracle Database 12c
---   tipo:      Oracle Database 12c
-
-
-
 CREATE TABLE bitacora (
     id_user      INTEGER NOT NULL,
     transaction  VARCHAR2(250) NOT NULL,
@@ -13,7 +6,7 @@ CREATE TABLE bitacora (
     date_time    DATE NOT NULL
 );
 
-CREATE TABLE branch (
+CREATE TABLE branch ( 
     id_branch       INTEGER NOT NULL,
     name_branch     VARCHAR2(120) NOT NULL,
     address_branch  VARCHAR2(220) NOT NULL,
@@ -25,8 +18,7 @@ ALTER TABLE branch ADD CONSTRAINT branch_pk PRIMARY KEY ( id_branch );
 CREATE TABLE category (
     id_category  INTEGER NOT NULL,
     name         VARCHAR2(50),
-    description  VARCHAR(100) 
---  ERROR: Datatype UNKNOWN is not allowed 
+    description  VARCHAR2(100) 
 );
 
 ALTER TABLE category ADD CONSTRAINT category_pk PRIMARY KEY ( id_category );
@@ -56,13 +48,13 @@ CREATE TABLE dispatch_details (
 
 ALTER TABLE dispatch_details ADD CONSTRAINT dispatch_details1_pk PRIMARY KEY ( id_dispatch );
 
-CREATE TABLE "Order" (
+CREATE TABLE n_Order (
     id_order      INTEGER NOT NULL,
     date_time     DATE NOT NULL,
     total_amount  NUMBER(10, 2) NOT NULL
 );
 
-ALTER TABLE "Order" ADD CONSTRAINT order_pk PRIMARY KEY ( id_order );
+ALTER TABLE n_Order ADD CONSTRAINT order_pk PRIMARY KEY ( id_order );
 
 CREATE TABLE order_detail (
     id_detail               INTEGER NOT NULL,
@@ -72,7 +64,7 @@ CREATE TABLE order_detail (
     total_order             NUMBER(10, 2) NOT NULL,
     id_order                INTEGER NOT NULL,
     CONSTRAINT prov_prod_detail_fk FOREIGN KEY (id_provider_by_product) REFERENCES   provider_by_product(id_provider_by_product),
-        CONSTRAINT order_fk FOREIGN KEY (id_order) REFERENCES   "Order"(id_order)
+        CONSTRAINT order_fk FOREIGN KEY (id_order) REFERENCES   n_Order(id_order)
 
 
 );
@@ -127,53 +119,41 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 
 
 
--- Informe de Resumen de Oracle SQL Developer Data Modeler: 
--- 
--- CREATE TABLE                            11
--- CREATE INDEX                             0
--- ALTER TABLE                             10
--- CREATE VIEW                              0
--- ALTER VIEW                               0
--- CREATE PACKAGE                           0
--- CREATE PACKAGE BODY                      0
--- CREATE PROCEDURE                         0
--- CREATE FUNCTION                          0
--- CREATE TRIGGER                           0
--- ALTER TRIGGER                            0
--- CREATE COLLECTION TYPE                   0
--- CREATE STRUCTURED TYPE                   0
--- CREATE STRUCTURED TYPE BODY              0
--- CREATE CLUSTER                           0
--- CREATE CONTEXT                           0
--- CREATE DATABASE                          0
--- CREATE DIMENSION                         0
--- CREATE DIRECTORY                         0
--- CREATE DISK GROUP                        0
--- CREATE ROLE                              0
--- CREATE ROLLBACK SEGMENT                  0
--- CREATE SEQUENCE                          0
--- CREATE MATERIALIZED VIEW                 0
--- CREATE MATERIALIZED VIEW LOG             0
--- CREATE SYNONYM                           0
--- CREATE TABLESPACE                        0
--- CREATE USER                              0
--- 
--- DROP TABLESPACE                          0
--- DROP DATABASE                            0
--- 
--- REDACTION POLICY                         0
--- TSDP POLICY                              0
--- 
--- ORDS DROP SCHEMA                         0
--- ORDS ENABLE SCHEMA                       0
--- ORDS ENABLE OBJECT                       0
--- 
--- ERRORS                                   1
--- WARNINGS                                 0
+-----
 
+DROP TABLE BITACORA;  
+DROP TABLE BRANCH;  --CRUD   LISTAR
+DROP TABLE CATEGORY; --CRUD  LISTAR
+DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD  
+DROP TABLE DISPATCH_DETAILS; --CRUD  
+DROP TABLE ORDER_DETAIL; --CRUD
+DROP TABLE n_Order; --CRUD LISTAR
+DROP TABLE PRODUCT; --CRUD LISTAR 
+DROP TABLE PROVIDER; --CRUD LISTAR
+DROP TABLE PROVIDER_BY_PRODUCT; --CRUD
+DROP TABLE WAREHOUSE_USER; --CRUD LISTAR
 
 
 SELECT * FROM BRANCH;
+SELECT * FROM CATEGORY;
 
 
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(1,'LAPOLA','LAS VEGAS','8184856105'); 
+INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(2,'BOLANOS','LOS ANGELES','1001001012'); 
+
+INSERT INTO CATEGORY (id_category,name,description)VALUES (1,'ELECTRO DOMESTICOS','PRODUCTOS DE USO DEL HOGAR');
+INSERT INTO CATEGORY (id_category,name,description)VALUES (2,'CONSUMO BASICO','se compran regularmente, no pueden faltar.');
+
+INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (1,'ESTUFA',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1);
+INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (2,'CAFE',TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),2);
+
+INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (1,'UBERFREIHGT','10035230-8','2200000','Mixco Guatemala');
+INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (2,'LANDSTAR','109920-3','2300000','Ciudad de Guatemala');
+
+INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (1,'Fernando A', '5555-2222', 'Owner');
+INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (2,'Pedro F', '5555-2222', 'DBA');
+
+INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
+INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (2,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),200.50);
+
+

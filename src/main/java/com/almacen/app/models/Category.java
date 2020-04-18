@@ -5,8 +5,9 @@ public class Category {
 	private Long idCategory;
 	private String nameCategory;
 	private String descriptionCategory;
-	
 
+
+	
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -48,8 +49,8 @@ public class Category {
 	public void setDescriptionCategory(String descriptionCategory) {
 		this.descriptionCategory = descriptionCategory;
 	}
+	
 
-	
-	
+
 	
 }
