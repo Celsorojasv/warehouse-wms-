@@ -124,19 +124,25 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 DROP TABLE BITACORA;  
 DROP TABLE BRANCH;  --CRUD   LISTAR
 DROP TABLE CATEGORY; --CRUD  LISTAR
-DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD  
-DROP TABLE DISPATCH_DETAILS; --CRUD  
-DROP TABLE ORDER_DETAIL; --CRUD
+DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD LISTAR/D
+DROP TABLE DISPATCH_DETAILS; --CRUD LISTAR
+DROP TABLE ORDER_DETAIL; --CRUD LISTAR
 DROP TABLE n_Order; --CRUD LISTAR
 DROP TABLE PRODUCT; --CRUD LISTAR 
 DROP TABLE PROVIDER; --CRUD LISTAR
-DROP TABLE PROVIDER_BY_PRODUCT; --CRUD
+DROP TABLE PROVIDER_BY_PRODUCT; --CRUD LISTAR
 DROP TABLE WAREHOUSE_USER; --CRUD LISTAR
 
 
 SELECT * FROM BRANCH;
 SELECT * FROM CATEGORY;
-
+SELECT * FROM PRODUCT;
+SELECT * FROM PROVIDER;
+SELECT * FROM WAREHOUSE_USER;
+SELECT * FROM provider_by_product;
+SELECT * FROM ORDER_DETAIL;
+SELECT * FROM DISPATCH_BY_WAREHOUSE;
+SELECT * FROM DISPATCH_DETAILS;
 
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(1,'LAPOLA','LAS VEGAS','8184856105'); 
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(2,'BOLANOS','LOS ANGELES','1001001012'); 
@@ -156,4 +162,14 @@ INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (2,'P
 INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
 INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (2,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),200.50);
 
+INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (1,TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
+INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (2,TO_DATE('2020/04/19 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,400,150.99);
 
+INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (1,1,100,150.55,300.50,1);
+INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (2,2,400,350.55,1300.50,2);
+
+INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (1,1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (2,2,2,TO_DATE('2020/05/25 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+
+INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (1,1,100,2);
+INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (2,2,10,1);

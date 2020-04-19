@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.almacen.app.models.Category;
 
-@Repository
+@Service
 public class CategoryDAO {
 	
 	@Autowired
