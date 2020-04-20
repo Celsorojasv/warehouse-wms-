@@ -147,6 +147,41 @@ SELECT * FROM DISPATCH_DETAILS;
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(1,'LAPOLA','LAS VEGAS','8184856105'); 
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(2,'BOLANOS','LOS ANGELES','1001001012'); 
 
+
+CREATE OR REPLACE PROCEDURE create_branch (Pid_branch IN branch.id_branch%TYPE, Pname_branch IN branch.name_branch%TYPE,Paddress_branch IN branch.address_branch%TYPE,Pphone_branch IN branch.phone_branch%TYPE) AS
+BEGIN
+  INSERT INTO BRANCH (id_branch,name_branch,address_branch,phone_branch) VALUES (Pid_branch,Pname_branch,Paddress_branch,Pphone_branch);
+  COMMIT;
+END;
+
+CALL create_branch (4,'JIFFY','MIXCO','4754-5847');
+
+CREATE OR REPLACE PROCEDURE delete_branch (Pid_branch IN branch.id_branch%TYPE) IS
+BEGIN
+  DELETE FROM BRANCH WHERE id_branch =  Pid_branch;
+END delete_branch;
+
+
+CREATE OR REPLACE PROCEDURE update_branch (Pid_branch IN branch.id_branch%TYPE, Pname_branch IN branch.name_branch%TYPE,Paddress_branch IN branch.address_branch%TYPE,Pphone_branch IN branch.phone_branch%TYPE) AS
+BEGIN
+  UPDATE BRANCH
+  SET 
+  name_branch = Pname_branch, address_branch = Paddress_branch , phone_branch = Pphone_branch
+  WHERE
+  id_branch = Pid_branch;
+  COMMIT;
+END;
+
+
+BEGIN
+   delete_branch(3);
+END;
+
+
+CALL update_branch(3,'EL FOX','Los Olivos','5555-2222');
+
+
+
 INSERT INTO CATEGORY (id_category,name,description)VALUES (1,'ELECTRO DOMESTICOS','PRODUCTOS DE USO DEL HOGAR');
 INSERT INTO CATEGORY (id_category,name,description)VALUES (2,'CONSUMO BASICO','se compran regularmente, no pueden faltar.');
 
