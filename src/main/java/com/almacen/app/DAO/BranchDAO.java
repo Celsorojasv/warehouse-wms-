@@ -25,11 +25,6 @@ public class BranchDAO  implements IBranchService {
 	private SimpleJdbcCall call;
 	
 	
-	public BranchDAO(JdbcTemplate jdbcTemplate) {
-		super();
-		this.jdbcTemplate = jdbcTemplate;
-	}
-	
 	@Transactional(readOnly = true)
 	public List<Branch> list(){
 	

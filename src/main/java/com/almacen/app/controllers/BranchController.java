@@ -50,7 +50,7 @@ public class BranchController {
 		return "Updated";
 	}
 	
-	// http://localhost:8090/remove/{id}
+	// http://localhost:8090/removeBranch/{id}
 	
 	@DeleteMapping("/removeBranch/{id}")
 	public String removeBranch(@PathVariable Integer id) {
