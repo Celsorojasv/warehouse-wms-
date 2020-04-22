@@ -41,22 +41,31 @@ public class BranchDAO  implements IBranchService {
 		
 	}
 
+
 	@Transactional
 	@Override
-	public void deleteBranch(Integer idBranch) {
+	public void createBranch(Branch branch) {
 		// TODO Auto-generated method stub
-		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("delete_branch");
+		
+		//Pname_branch,Paddress_branch,Pphone_branch
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_branch");
+		Map<String, Object> culoMap = new HashMap<String, Object>();
+		culoMap.put("Pname_branch", branch.getNameBranch());
+		culoMap.put("Paddress_branch", branch.getAddressBranch());
+		culoMap.put("Pphone_branch", branch.getPhoneBranch());
+		
+		
 		SqlParameterSource src = new MapSqlParameterSource()
-				.addValue("Pid_branch", idBranch);
-		
+				.addValues(culoMap);
 		call.execute(src);
-		
 	}
-
+	
+	@Transactional
 	@Override
 	public void updateBranch(Branch branch) {
 		// TODO Auto-generated method stub
 		
+		//Pid_branch,Pname_branch,Paddress_branch,Pphone_branch
 		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("update_branch");
 		Map<String, Object> culoMap = new HashMap<String, Object>();
 		
@@ -70,24 +79,19 @@ public class BranchDAO  implements IBranchService {
 		call.execute(src);
 		
 	}
-
+	
 	@Transactional
 	@Override
-	public void createBranch(Branch branch) {
+	public void deleteBranch(Integer idBranch) {
 		// TODO Auto-generated method stub
-		
-		//Pid_branch,Pname_branch,Paddress_branch,Pphone_branch
-		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_branch");
-		Map<String, Object> culoMap = new HashMap<String, Object>();
-		culoMap.put("Pid_branch", branch.getIdBranch());
-		culoMap.put("Pname_branch", branch.getNameBranch());
-		culoMap.put("Paddress_branch", branch.getAddressBranch());
-		culoMap.put("Pphone_branch", branch.getPhoneBranch());
-		
-		
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("delete_branch");
 		SqlParameterSource src = new MapSqlParameterSource()
-				.addValues(culoMap);
+				.addValue("Pid_branch", idBranch);
+		
 		call.execute(src);
+		
 	}
+
+
 
 }

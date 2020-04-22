@@ -1,3 +1,23 @@
+CREATE SEQUENCE sq_branch INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_category INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_dispatch_by_warehouse INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_dispatch_details INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_n_order INCREMENT BY 1 START WITH 1;
+	
+CREATE SEQUENCE sq_order_detail INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_product INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_provider INCREMENT BY 1 START WITH 1;
+
+CREATE SEQUENCE sq_provider_by_product INCREMENT BY 1 START WITH 1;
+	
+CREATE SEQUENCE sq_warehouse_user INCREMENT BY 1 START WITH 1;
+	
 CREATE TABLE bitacora (
     id_user      INTEGER NOT NULL,
     transaction  VARCHAR2(250) NOT NULL,
@@ -121,8 +141,8 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 -----
 
 DROP TABLE BITACORA;  
-DROP TABLE BRANCH;  --CRUD   LISTAR
-DROP TABLE CATEGORY; --CRUD  LISTAR
+DROP TABLE BRANCH;  --CRUD LISTAR LISTO
+DROP TABLE CATEGORY; --CRUD LISTAR
 DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD LISTAR/D
 DROP TABLE DISPATCH_DETAILS; --CRUD LISTAR
 DROP TABLE ORDER_DETAIL; --CRUD LISTAR
@@ -149,13 +169,14 @@ INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(2,
 
 --Procedimientos CRUD BRANCH
 --CREATE
-CREATE OR REPLACE PROCEDURE create_branch (Pid_branch IN branch.id_branch%TYPE, Pname_branch IN branch.name_branch%TYPE,Paddress_branch IN branch.address_branch%TYPE,Pphone_branch IN branch.phone_branch%TYPE) AS
+CREATE OR REPLACE PROCEDURE create_branch (Pname_branch IN branch.name_branch%TYPE,Paddress_branch IN branch.address_branch%TYPE,Pphone_branch IN branch.phone_branch%TYPE) AS
 BEGIN
-  INSERT INTO BRANCH (id_branch,name_branch,address_branch,phone_branch) VALUES (Pid_branch,Pname_branch,Paddress_branch,Pphone_branch);
+  INSERT INTO BRANCH (id_branch,name_branch,address_branch,phone_branch) VALUES (sq_branch.NEXTVAL,Pname_branch,Paddress_branch,Pphone_branch);
   COMMIT;
 END;
 
-CALL create_branch (4,'JIFFY','MIXCO','4754-5847');
+CALL create_branch ('JIFFY','MIXCO','4754-5847');
+
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_branch (Pid_branch IN branch.id_branch%TYPE, Pname_branch IN branch.name_branch%TYPE,Paddress_branch IN branch.address_branch%TYPE,Pphone_branch IN branch.phone_branch%TYPE) AS
@@ -168,7 +189,7 @@ BEGIN
   COMMIT;
 END;
 
-CALL update_branch(3,'EL FOX','Los Olivos','5555-2222');
+CALL update_branch(4,'EL FOX','Los Olivos','5555-2222');
 
 --DELETE
 CREATE OR REPLACE PROCEDURE delete_branch (Pid_branch IN branch.id_branch%TYPE) IS
@@ -187,13 +208,13 @@ INSERT INTO CATEGORY (id_category,name,description)VALUES (2,'CONSUMO BASICO','s
 
 --Procedimientos CRUD CATEGORY
 --CREATE
-CREATE OR REPLACE PROCEDURE create_category (pid_category IN category.id_category%TYPE, pname IN category.name%TYPE, pdescription IN category.description%TYPE) AS
+CREATE OR REPLACE PROCEDURE create_category (pname IN category.name%TYPE, pdescription IN category.description%TYPE) AS
 BEGIN
-    INSERT INTO CATEGORY (id_category,name,description) VALUES (pid_category,pname,pdescription);
+    INSERT INTO CATEGORY (id_category,name,description) VALUES (sq_category.NEXTVAL,pname,pdescription);
     COMMIT;
 END;
 
-CALL create_category(3,'ALIMENTOS','ALIMENTOS NO REFRIGERADOS');
+CALL create_category('ALIMENTOS','ALIMENTOS NO REFRIGERADOS');
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_category (pid_category IN category.id_category%TYPE, pname IN category.name%TYPE, pdescription IN category.description%TYPE) AS
@@ -225,14 +246,14 @@ INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES
 
 --Procedimientos CRUD PRODUCT
 --CREATE
-CREATE OR REPLACE PROCEDURE create_product (pid_product IN product.id_product%TYPE, pname_product IN product.name_product%TYPE, pcreated_product IN product.created_product%TYPE,
+CREATE OR REPLACE PROCEDURE create_product (pname_product IN product.name_product%TYPE, pcreated_product IN product.created_product%TYPE,
 pid_category IN product.id_category%TYPE) AS
 BEGIN 
-    INSERT INTO PRODUCT(id_product,name_product,created_product,id_category) VALUES (pid_product,pname_product,pcreated_product,pid_category);
+    INSERT INTO PRODUCT(id_product,name_product,created_product,id_category) VALUES (sq_product.NEXTVAL,pname_product,pcreated_product,pid_category);
     COMMIT;
 END;
 
-CALL create_product(4,'PEPSI',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),2);
+CALL create_product('PEPSI',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),2);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_product (pid_product IN product.id_product%TYPE, pname_product IN product.name_product%TYPE, pcreated_product IN product.created_product%TYPE,
@@ -267,14 +288,14 @@ INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,addr
 
 --Procedimientos CRUD PROVIDER
 --CREATE
-CREATE OR REPLACE PROCEDURE create_provider (pid_provider IN provider.id_provider%TYPE,pname_provider IN provider.name_provider%TYPE, pnit_provider IN provider.nit_provider%TYPE,
+CREATE OR REPLACE PROCEDURE create_provider (pname_provider IN provider.name_provider%TYPE, pnit_provider IN provider.nit_provider%TYPE,
 pphone_provider IN provider.phone_provider%TYPE,paddress_provider IN provider.address_provider%TYPE) AS
 BEGIN
-    INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (pid_provider,pname_provider,pnit_provider,pphone_provider,paddress_provider);
+    INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (sq_provider.NEXTVAL,pname_provider,pnit_provider,pphone_provider,paddress_provider);
     COMMIT;
 END;
 
-CALL create_provider(3,'UBERFREIHGT','10035230-8','2200000','Mixco Guatemala');
+CALL create_provider('UBERFREIHGT','10035230-8','2200000','Mixco Guatemala');
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_provider (pid_provider IN provider.id_provider%TYPE,pname_provider IN provider.name_provider%TYPE, pnit_provider IN provider.nit_provider%TYPE,
@@ -309,13 +330,13 @@ INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (2,'P
 
 --Procedimientos CRUD WAREHOUSE_USER
 --CREATE
-CREATE OR REPLACE PROCEDURE create_warehouse_user(pid_user IN warehouse_user.id_user%TYPE,pname_user IN warehouse_user.name_user%TYPE,pphone_user IN warehouse_user.phone_user%TYPE,pjob_title warehouse_user.job_title%TYPE)AS
+CREATE OR REPLACE PROCEDURE create_warehouse_user(pname_user IN warehouse_user.name_user%TYPE,pphone_user IN warehouse_user.phone_user%TYPE,pjob_title warehouse_user.job_title%TYPE)AS
 BEGIN
-    INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (pid_user,pname_user,pphone_user,pjob_title);
+    INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (sq_warehouse_user.NEXTVAL,pname_user,pphone_user,pjob_title);
     COMMIT;
 END;
 
-CALL create_warehouse_user (3,'Fernando A', '5555-2222', 'Owner');
+CALL create_warehouse_user ('Fernando A', '5555-2222', 'Owner');
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_warehouse_user(pid_user IN warehouse_user.id_user%TYPE,pname_user IN warehouse_user.name_user%TYPE,pphone_user IN warehouse_user.phone_user%TYPE,pjob_title warehouse_user.job_title%TYPE)AS
@@ -349,13 +370,13 @@ INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (2,TO_DATE('2020/04
 
 --Procedimientos CRUD n_Order
 --CREATE
-CREATE OR REPLACE PROCEDURE create_n_order(pid_order IN n_order.id_order%TYPE, pdate_time IN n_order.date_time%TYPE, ptotal_amount IN n_order.total_amount%TYPE)AS
+CREATE OR REPLACE PROCEDURE create_n_order(pdate_time IN n_order.date_time%TYPE, ptotal_amount IN n_order.total_amount%TYPE)AS
 BEGIN
-    INSERT INTO N_ORDER (id_order,date_time,total_amount) VALUES (pid_order,TO_DATE(pdate_time, 'yyyy/mm/dd hh24:mi:ss'),ptotal_amount);
+    INSERT INTO N_ORDER (id_order,date_time,total_amount) VALUES (sq_n_order.NEXTVAL,TO_DATE(pdate_time, 'yyyy/mm/dd hh24:mi:ss'),ptotal_amount);
     COMMIT;
 END;
 
-CALL create_n_order (3,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
+CALL create_n_order (TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_n_order (pid_order IN n_order.id_order%TYPE, pdate_time IN n_order.date_time%TYPE, ptotal_amount IN n_order.total_amount%TYPE)AS
@@ -378,7 +399,7 @@ BEGIN
 END delete_n_order ;
 
 BEGIN
-    delete_n_order (3);
+    delete_n_order (1);
 END;
 
 --PROVIDER_BY_PRODUCT
@@ -387,14 +408,14 @@ INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,i
 INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (2,TO_DATE('2020/04/19 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,400,150.99);
 --Procedimientos CRUD PROVIDER_BY_PRODUCT
 --CREATE
-CREATE OR REPLACE PROCEDURE create_provider_by_product(pid_provider_by_product IN provider_by_product.id_provider_by_product%TYPE,plast_added IN provider_by_product.last_added%TYPE,pid_provider IN provider_by_product.id_provider%TYPE,
+CREATE OR REPLACE PROCEDURE create_provider_by_product(plast_added IN provider_by_product.last_added%TYPE,pid_provider IN provider_by_product.id_provider%TYPE,
 pid_product IN  provider_by_product.id_product%TYPE,pid_user IN provider_by_product.id_user%TYPE,pquantity IN provider_by_product.quantity%TYPE,pprice_product IN provider_by_product.price_product%TYPE)AS
 BEGIN
-    INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (pid_provider_by_product,TO_DATE(plast_added,'yyyy/mm/dd hh24:mi:ss'),pid_provider,pid_product,pid_user,pquantity,pprice_product);
+    INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (sq_provider_by_product.NEXTVAL,TO_DATE(plast_added,'yyyy/mm/dd hh24:mi:ss'),pid_provider,pid_product,pid_user,pquantity,pprice_product);
     COMMIT;
 END;
 
-CALL create_provider_by_product (3,TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
+CALL create_provider_by_product (TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
 
 --UPDATE
 
@@ -434,14 +455,14 @@ INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_p
 INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (2,2,400,350.55,1300.50,2);
 --Procedimientos CRUD ORDER_DETAIL
 --CREATE
-CREATE OR REPLACE PROCEDURE create_order_detail(pid_detail IN order_detail.id_detail%TYPE,pid_provider_by_product IN order_detail.id_provider_by_product%TYPE,pquatity_in IN order_detail.quatity_in%TYPE,
+CREATE OR REPLACE PROCEDURE create_order_detail(pid_provider_by_product IN order_detail.id_provider_by_product%TYPE,pquatity_in IN order_detail.quatity_in%TYPE,
 pprice_by_product IN order_detail.price_by_product%TYPE,ptotal_order IN order_detail.total_order%TYPE,pid_order IN order_detail.id_order%TYPE)AS
 BEGIN
-    INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (pid_detail,pid_provider_by_product,pquatity_in,pprice_by_product,ptotal_order,pid_order);
+    INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (sq_order_detail.NEXTVAL,pid_provider_by_product,pquatity_in,pprice_by_product,ptotal_order,pid_order);
     COMMIT;
 END;
 
-CALL create_order_detail (3,1,100,150.55,300.50,1);
+CALL create_order_detail (1,100,150.55,300.50,1);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_order_detail(pid_detail IN order_detail.id_detail%TYPE,pid_provider_by_product IN order_detail.id_provider_by_product%TYPE,pquatity_in IN order_detail.quatity_in%TYPE,
@@ -477,14 +498,14 @@ INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,la
 INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (2,2,2,TO_DATE('2020/05/25 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
 --Procedimientos CRUD DISPATCH_BY_WAREHOUSE
 --CREATE
-CREATE OR REPLACE PROCEDURE create_dispatch_by_warehouse(pid_dispatch_by_warehouse IN dispatch_by_warehouse.id_dispatch_by_warehouse%TYPE,pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
+CREATE OR REPLACE PROCEDURE create_dispatch_by_warehouse(pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
 plast_sent IN dispatch_by_warehouse.last_sent%TYPE)AS
 BEGIN
-    INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (pid_dispatch_by_warehouse,pid_branch,pid_user,TO_DATE(plast_sent , 'yyyy/mm/dd hh24:mi:ss'));
+    INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (sq_dispatch_by_warehouse.NEXTVAL,pid_branch,pid_user,TO_DATE(plast_sent , 'yyyy/mm/dd hh24:mi:ss'));
     COMMIT;
 END;
 
-CALL create_dispatch_by_warehouse (3,1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+CALL create_dispatch_by_warehouse (1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_dispatch_by_warehouse (pid_dispatch_by_warehouse IN dispatch_by_warehouse.id_dispatch_by_warehouse%TYPE,pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
@@ -518,14 +539,14 @@ INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,
 --Procedimientos CRUD --DISPATCH_DETAILS
 
 --CREATE
-CREATE OR REPLACE PROCEDURE create_dispatch_details(pid_dispatch IN dispatch_details.id_dispatch%TYPE , pid_dispatch_by_warehouse IN dispatch_details.id_dispatch_by_warehouse%TYPE , pquantity_out IN dispatch_details.quantity_out%TYPE,
+CREATE OR REPLACE PROCEDURE create_dispatch_details(pid_dispatch_by_warehouse IN dispatch_details.id_dispatch_by_warehouse%TYPE , pquantity_out IN dispatch_details.quantity_out%TYPE,
 pid_provider_by_product IN dispatch_details.id_provider_by_product%TYPE)AS
 BEGIN
-    INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (pid_dispatch,pid_dispatch_by_warehouse,pquantity_out,pid_provider_by_product);
+    INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (sq_dispatch_details.NEXTVAL,pid_dispatch_by_warehouse,pquantity_out,pid_provider_by_product);
     COMMIT;
 END;
 
-CALL create_dispatch_details (3,1,100,2);
+CALL create_dispatch_details (1,100,2);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_dispatch_details(pid_dispatch IN dispatch_details.id_dispatch%TYPE , pid_dispatch_by_warehouse IN dispatch_details.id_dispatch_by_warehouse%TYPE , pquantity_out IN dispatch_details.quantity_out%TYPE,

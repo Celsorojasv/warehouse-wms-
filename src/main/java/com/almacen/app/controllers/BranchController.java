@@ -32,31 +32,31 @@ public class BranchController {
 		return service.list();
 	}
 
-	// http://localhost:8090/remove/{id}
+
+	// http://localhost:8090/createBranch (json  Body Raw JSON)
 	
-	@DeleteMapping("/remove/{id}")
-	public String removeBranch(@PathVariable Integer id) {
-		service2.deleteBranch(id);
-		
-		return "eliminado";
-	}
-	
-	// http://localhost:8090/create (json  Body Raw JSON)
-	
-	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/createBranch", consumes = "application/json", produces = "application/json")
 	public String addBranch(@RequestBody Branch branch) {
 		service2.createBranch(branch);
 		
-		return "creado";
+		return "Created";
 	}
 	
-	// http://localhost:8090/update/{id}  (json  Body Raw JSON)
+	// http://localhost:8090/updateBranch/id  (json  Body Raw JSON)
 	
-	@PutMapping(value = "/update/{id}" , consumes = "application/json", produces = "application/json") 
+	@PutMapping(value = "/updateBranch/{id}" , consumes = "application/json", produces = "application/json") 
 	public String updateBranch(@PathVariable Integer id,@RequestBody Branch branch) {
 		service2.updateBranch(branch);
-		return id + " Actualizado";
+		return "Updated";
 	}
 	
+	// http://localhost:8090/remove/{id}
+	
+	@DeleteMapping("/removeBranch/{id}")
+	public String removeBranch(@PathVariable Integer id) {
+		service2.deleteBranch(id);
+		
+		return "Deleted";
+	}
 	
 }
