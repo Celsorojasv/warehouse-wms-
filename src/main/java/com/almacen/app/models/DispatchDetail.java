@@ -1,23 +1,31 @@
 package com.almacen.app.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"culo","dispatchWarehouse","quantityOut","providerProduct"})
 public class DispatchDetail {
 
+	@JsonProperty("culo") // Alias Json Convencion todo minuscula. 
 	private Long idDispatch;
-	private DispatchByWarehouse idDispatchWarehouse;
+	private DispatchByWarehouse dispatchWarehouse;
 	private Integer quantityOut;
-	private ProviderByProduct idProviderProduct;
+	private ProviderByProduct providerProduct;
 	
 	public DispatchDetail() {
 		super();
 		// TODO Auto-generated constructor stub
+		
+
 	}
 
-	public DispatchDetail(DispatchByWarehouse idDispatchWarehouse, Integer quantityOut,
-			ProviderByProduct idProviderProduct) {
+	public DispatchDetail(Long idDispatch, DispatchByWarehouse dispatchWarehouse, Integer quantityOut,
+			ProviderByProduct providerProduct) {
 		super();
-		this.idDispatchWarehouse = idDispatchWarehouse;
+		this.idDispatch = idDispatch;
+		this.dispatchWarehouse = dispatchWarehouse;
 		this.quantityOut = quantityOut;
-		this.idProviderProduct = idProviderProduct;
+		this.providerProduct = providerProduct;
 	}
 
 	public Long getIdDispatch() {
@@ -28,12 +36,12 @@ public class DispatchDetail {
 		this.idDispatch = idDispatch;
 	}
 
-	public DispatchByWarehouse getIdDispatchWarehouse() {
-		return idDispatchWarehouse;
+	public DispatchByWarehouse getDispatchWarehouse() {
+		return dispatchWarehouse;
 	}
 
-	public void setIdDispatchWarehouse(DispatchByWarehouse idDispatchWarehouse) {
-		this.idDispatchWarehouse = idDispatchWarehouse;
+	public void setDispatchWarehouse(DispatchByWarehouse dispatchWarehouse) {
+		this.dispatchWarehouse = dispatchWarehouse;
 	}
 
 	public Integer getQuantityOut() {
@@ -44,13 +52,15 @@ public class DispatchDetail {
 		this.quantityOut = quantityOut;
 	}
 
-	public ProviderByProduct getIdProviderProduct() {
-		return idProviderProduct;
+	public ProviderByProduct getProviderProduct() {
+		return providerProduct;
 	}
 
-	public void setIdProviderProduct(ProviderByProduct idProviderProduct) {
-		this.idProviderProduct = idProviderProduct;
+	public void setProviderProduct(ProviderByProduct providerProduct) {
+		this.providerProduct = providerProduct;
 	}
+
+
 	
 	
 }

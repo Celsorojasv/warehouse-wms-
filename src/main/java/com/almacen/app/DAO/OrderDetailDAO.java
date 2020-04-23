@@ -2,23 +2,30 @@ package com.almacen.app.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
 import com.almacen.app.models.Order;
 import com.almacen.app.models.OrderDetail;
 import com.almacen.app.models.ProviderByProduct;
+import com.almacen.interfaces.IOrderDetailService;
 
 @Service
-public class OrderDetailDAO {
+public class OrderDetailDAO  implements IOrderDetailService {
 
 	 @Autowired
 	 private JdbcTemplate jdbcTemplate;
+
+	 private SimpleJdbcCall call;
 
 
 	 public List<OrderDetail> list(){
@@ -54,5 +61,65 @@ public class OrderDetailDAO {
 		 });
 		 
 		 return listOrderDetail;
-	 }  
+	 }
+
+
+	@Override
+	public void createOrDetail(OrderDetail orderDetail) {
+		// TODO Auto-generated method stub
+		// pid_provider_by_product,pquatity_in,pprice_by_product,ptotal_order,pid_order		
+
+		
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_order_detail");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pid_provider_by_product", orderDetail.getIdProviderProduct());
+		map.put("pquatity_in", orderDetail.getQuantityIn());
+		map.put("pprice_by_product", orderDetail.getPriceByProduct());
+		map.put("ptotal_order", orderDetail.getTotalOrder());
+		map.put("pid_order", orderDetail.getIdOrder());
+
+		
+		SqlParameterSource src = new MapSqlParameterSource()
+				.addValues(map);
+		call.execute(src);
+		
+	}
+
+
+	@Override
+	public void updateOrDetail(OrderDetail orderDetail) {
+		// TODO Auto-generated method stub
+		// pid_detail,pid_provider_by_product,pquatity_in,pprice_by_product,ptotal_order,pid_order		
+
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("update_order_detail");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pid_detail", orderDetail.getIdOrder());
+		map.put("pid_provider_by_product", orderDetail.getIdProviderProduct());
+		map.put("pquatity_in", orderDetail.getQuantityIn());
+		map.put("pprice_by_product", orderDetail.getPriceByProduct());
+		map.put("ptotal_order", orderDetail.getTotalOrder());
+		map.put("pid_order", orderDetail.getIdOrder());
+
+		
+		SqlParameterSource src = new MapSqlParameterSource()
+				.addValues(map);
+		call.execute(src);
+		
+		
+	}
+
+
+	@Override
+	public void deleteOrDetail(Integer idOrderDetail) {
+		// TODO Auto-generated method stub
+		
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("delete_order_detail");
+		SqlParameterSource src = new MapSqlParameterSource()
+				.addValue("pid_detail", idOrderDetail);
+		
+		call.execute(src);
+	}		
+	
 }

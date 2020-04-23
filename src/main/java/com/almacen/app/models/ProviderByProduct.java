@@ -2,14 +2,22 @@ package com.almacen.app.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class ProviderByProduct {
 	
 	private Long idProviderProduct;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date lastAdded;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Provider idProvider;   
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Product idProduct;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private WarehouseUser idUser;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer quantity;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Double priceProduct;
 	
 

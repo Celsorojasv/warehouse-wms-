@@ -1,3 +1,5 @@
+--SEQUENCIAS
+
 CREATE SEQUENCE sq_branch INCREMENT BY 1 START WITH 1;
 
 CREATE SEQUENCE sq_category INCREMENT BY 1 START WITH 1;
@@ -18,6 +20,8 @@ CREATE SEQUENCE sq_provider_by_product INCREMENT BY 1 START WITH 1;
 	
 CREATE SEQUENCE sq_warehouse_user INCREMENT BY 1 START WITH 1;
 	
+--TABLAS
+
 CREATE TABLE bitacora (
     id_user      INTEGER NOT NULL,
     transaction  VARCHAR2(250) NOT NULL,
@@ -140,17 +144,25 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 
 -----
 
+--SIMPLE DATE FORMAT Java INVESTIGAR , @JsonProperty , @JsonPropertyOrder({"culo","dispatchWarehouse","quantityOut","providerProduct"}) ,	@JsonProperty("culo") // Alias Json Convencion todo minuscula. 
+--AREGLAR CRUDS
+--ARREGLAR FECHAS
+
 DROP TABLE BITACORA;  
-DROP TABLE BRANCH;  --CRUD LISTAR LISTO
-DROP TABLE CATEGORY; --CRUD LISTAR LISTO
-DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD LISTAR/D
-DROP TABLE DISPATCH_DETAILS; --CRUD LISTAR
-DROP TABLE ORDER_DETAIL; --CRUD LISTAR
-DROP TABLE n_Order; --CRUD LISTAR
-DROP TABLE PRODUCT; --CRUD LISTAR 
-DROP TABLE PROVIDER; --CRUD LISTAR LISTO
-DROP TABLE PROVIDER_BY_PRODUCT; --CRUD LISTAR
-DROP TABLE WAREHOUSE_USER; --CRUD LISTAR 
+DROP TABLE BRANCH;  --CRUD LISTAR LISTO *
+DROP TABLE CATEGORY; --CRUD LISTAR LISTO *
+DROP TABLE WAREHOUSE_USER; --CRUD LISTAR LISTO *
+DROP TABLE PROVIDER; --CRUD LISTAR LISTO *
+
+
+DROP TABLE DISPATCH_DETAILS; --CRUD LISTAR LISTO , JSON OJO 
+DROP TABLE ORDER_DETAIL; --CRUD LISTAR LISTO HACER PRUEBAS
+
+
+DROP TABLE PRODUCT; --CRUD LISTAR DATE AYUDA PET
+DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD LISTAR DATE
+DROP TABLE n_Order; --CRUD LISTAR DATE
+DROP TABLE PROVIDER_BY_PRODUCT; --CRUD LISTAR DATE
 
 
 SELECT * FROM BRANCH;
@@ -163,9 +175,40 @@ SELECT * FROM ORDER_DETAIL;
 SELECT * FROM DISPATCH_BY_WAREHOUSE;
 SELECT * FROM DISPATCH_DETAILS;
 
---BRANCH
+--- INSERTS
+
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(1,'LAPOLA','LAS VEGAS','8184856105'); 
 INSERT INTO BRANCH (ID_BRANCH, NAME_BRANCH,ADDRESS_BRANCH,PHONE_BRANCH)VALUES(2,'BOLANOS','LOS ANGELES','1001001012'); 
+
+INSERT INTO CATEGORY (id_category,name,description)VALUES (1,'ELECTRO DOMESTICOS','PRODUCTOS DE USO DEL HOGAR');
+INSERT INTO CATEGORY (id_category,name,description)VALUES (2,'CONSUMO BASICO','se compran regularmente, no pueden faltar.');
+
+INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (1,'ESTUFA',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1);
+INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (2,'CAFE',TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),2);
+
+INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (1,'UBERFREIHGT','10035230-8','2200000','Mixco Guatemala');
+INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (2,'LANDSTAR','109920-3','2300000','Ciudad de Guatemala');
+
+INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (1,'Fernando A', '5555-2222', 'Owner');
+INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (2,'Pedro F', '5555-2222', 'DBA');
+
+INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
+INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (2,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),200.50);
+
+INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (1,TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
+INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (2,TO_DATE('2020/04/19 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,400,150.99);
+
+INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (1,1,100,150.55,300.50,1);
+INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (2,2,400,350.55,1300.50,2);
+
+INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (1,1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (2,2,2,TO_DATE('2020/05/25 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+
+INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (1,1,100,2);
+INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (2,2,10,1);
+
+
+--BRANCH
 
 --Procedimientos CRUD BRANCH
 --CREATE
@@ -203,8 +246,6 @@ END;
 
 
 --CATEGORY
-INSERT INTO CATEGORY (id_category,name,description)VALUES (1,'ELECTRO DOMESTICOS','PRODUCTOS DE USO DEL HOGAR');
-INSERT INTO CATEGORY (id_category,name,description)VALUES (2,'CONSUMO BASICO','se compran regularmente, no pueden faltar.');
 
 --Procedimientos CRUD CATEGORY
 --CREATE
@@ -241,8 +282,6 @@ BEGIN
 END;
 
 --PRODUCT
-INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (1,'ESTUFA',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1);
-INSERT INTO PRODUCT (id_product,name_product,created_product,id_category) VALUES (2,'CAFE',TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),2);
 
 --Procedimientos CRUD PRODUCT
 --CREATE
@@ -282,9 +321,6 @@ BEGIN
 END;
 
 --PROVIDER
-INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (1,'UBERFREIHGT','10035230-8','2200000','Mixco Guatemala');
-INSERT INTO PROVIDER (id_provider,name_provider,nit_provider,phone_provider,address_provider) VALUES (2,'LANDSTAR','109920-3','2300000','Ciudad de Guatemala');
-
 
 --Procedimientos CRUD PROVIDER
 --CREATE
@@ -325,8 +361,6 @@ BEGIN
 END;
 
 --WAREHOUSE_USER
-INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (1,'Fernando A', '5555-2222', 'Owner');
-INSERT INTO WAREHOUSE_USER (id_user,name_user,phone_user,job_title) VALUES (2,'Pedro F', '5555-2222', 'DBA');
 
 --Procedimientos CRUD WAREHOUSE_USER
 --CREATE
@@ -365,8 +399,6 @@ BEGIN
 END;
 
 --ORDER
-INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
-INSERT INTO n_Order (id_order,date_time,total_amount) VALUES (2,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),200.50);
 
 --Procedimientos CRUD n_Order
 --CREATE
@@ -404,8 +436,6 @@ END;
 
 --PROVIDER_BY_PRODUCT
 
-INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (1,TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
-INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (2,TO_DATE('2020/04/19 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,400,150.99);
 --Procedimientos CRUD PROVIDER_BY_PRODUCT
 --CREATE
 CREATE OR REPLACE PROCEDURE create_provider_by_product(plast_added IN provider_by_product.last_added%TYPE,pid_provider IN provider_by_product.id_provider%TYPE,
@@ -451,8 +481,7 @@ END;
 
 
 --ORDER_DETAIL
-INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (1,1,100,150.55,300.50,1);
-INSERT INTO order_detail (id_detail,id_provider_by_product,quatity_in,price_by_product,total_order,id_order) VALUES (2,2,400,350.55,1300.50,2);
+
 --Procedimientos CRUD ORDER_DETAIL
 --CREATE
 CREATE OR REPLACE PROCEDURE create_order_detail(pid_provider_by_product IN order_detail.id_provider_by_product%TYPE,pquatity_in IN order_detail.quatity_in%TYPE,
@@ -494,8 +523,7 @@ BEGIN
 END;
 
 --DISPATCH_BY_WAREHOUSE
-INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (1,1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
-INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (2,2,2,TO_DATE('2020/05/25 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+
 --Procedimientos CRUD DISPATCH_BY_WAREHOUSE
 --CREATE
 CREATE OR REPLACE PROCEDURE create_dispatch_by_warehouse(pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
@@ -505,7 +533,7 @@ BEGIN
     COMMIT;
 END;
 
-CALL create_dispatch_by_warehouse (1,1,TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+CALL create_dispatch_by_warehouse (1,1,SYSDATE);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_dispatch_by_warehouse (pid_dispatch_by_warehouse IN dispatch_by_warehouse.id_dispatch_by_warehouse%TYPE,pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
@@ -534,8 +562,7 @@ BEGIN
 END;
 
 --DISPATCH_DETAILS
-INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (1,1,100,2);
-INSERT INTO DISPATCH_DETAILS (id_dispatch,id_dispatch_by_warehouse,quantity_out,id_provider_by_product) VALUES (2,2,10,1);
+
 --Procedimientos CRUD --DISPATCH_DETAILS
 
 --CREATE
@@ -574,4 +601,3 @@ END delete_dispatch_details ;
 BEGIN
     delete_dispatch_details (3);
 END;
-

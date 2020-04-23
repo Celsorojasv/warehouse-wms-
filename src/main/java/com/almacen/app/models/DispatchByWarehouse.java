@@ -2,11 +2,16 @@ package com.almacen.app.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class DispatchByWarehouse {
 
 	private Long idDispatchWarehouse;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Branch idBranch;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private WarehouseUser idUser;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date lastSend;
 	
 	public DispatchByWarehouse() {
@@ -21,11 +26,11 @@ public class DispatchByWarehouse {
 		this.lastSend = lastSend;
 	}
 
-	public Long getDispatchWarehouse() {
+	public Long getIdDispatchWarehouse() {
 		return idDispatchWarehouse;
 	}
 
-	public void setDispatchWarehouse(Long dispatchWarehouse) {
+	public void setIdDispatchWarehouse(Long dispatchWarehouse) {
 		this.idDispatchWarehouse = dispatchWarehouse;
 	}
 
@@ -51,6 +56,12 @@ public class DispatchByWarehouse {
 
 	public void setLastSend(Date lastSend) {
 		this.lastSend = lastSend;
+	}
+
+	@Override
+	public String toString() {
+		return "DispatchByWarehouse [idDispatchWarehouse=" + idDispatchWarehouse + ", idBranch=" + idBranch
+				+ ", idUser=" + idUser + ", lastSend=" + lastSend + "]";
 	}
 	
 	

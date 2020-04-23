@@ -32,7 +32,7 @@ public class DispatchByWarehouseDAO {
 				Branch b = new Branch();
 				WarehouseUser w = new WarehouseUser();
 				
-				d.setDispatchWarehouse(rs.getLong("id_dispatch_by_warehouse"));
+				d.setIdDispatchWarehouse(rs.getLong("id_dispatch_by_warehouse"));
 				b.setIdBranch(rs.getLong("id_branch"));
 				d.setIdBranch(b);
 				w.setIdUser(rs.getLong("id_user"));
