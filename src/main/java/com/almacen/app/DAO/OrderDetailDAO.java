@@ -47,14 +47,14 @@ public class OrderDetailDAO  implements IOrderDetailService {
 				or.setIdOrderDetail(rs.getLong("id_detail"));
 				
 				py.setIdProviderProduct(rs.getLong("id_provider_by_product"));				
-				or.setIdProviderProduct(py);
+				or.setProviderProduct(py);
 				
 				or.setQuantityIn(rs.getInt("quatity_in"));
 				or.setPriceByProduct(rs.getDouble("price_by_product"));
 				or.setTotalOrder(rs.getDouble("total_order"));
 				
 				order.setIdOrder(rs.getLong("id_order"));
-				or.setIdOrder(order);
+				or.setOrder(order);
 				
 				return or;
 			}
@@ -73,11 +73,11 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_order_detail");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("pid_provider_by_product", orderDetail.getIdProviderProduct());
+		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
 		map.put("pquatity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
 		map.put("ptotal_order", orderDetail.getTotalOrder());
-		map.put("pid_order", orderDetail.getIdOrder());
+		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 
 		
 		SqlParameterSource src = new MapSqlParameterSource()
@@ -95,12 +95,12 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("update_order_detail");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("pid_detail", orderDetail.getIdOrder());
-		map.put("pid_provider_by_product", orderDetail.getIdProviderProduct());
+		map.put("pid_detail", orderDetail.getIdOrderDetail());
+		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
 		map.put("pquatity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
 		map.put("ptotal_order", orderDetail.getTotalOrder());
-		map.put("pid_order", orderDetail.getIdOrder());
+		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 
 		
 		SqlParameterSource src = new MapSqlParameterSource()

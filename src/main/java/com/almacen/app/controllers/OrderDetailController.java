@@ -63,3 +63,19 @@ public class OrderDetailController {
 
 
 }
+
+
+
+/*
+ * { CREATE "providerProduct":{ "idProviderProduct":2 }, "quantityIn": 1000,
+ * "priceByProduct": 1000.50, "totalOrder": 1000, "order":{ "idOrder":4 } }
+ */
+
+/*
+ * { "idOrderDetail":1, "providerProduct":{ "idProviderProduct":2 },
+ * "quantityIn": 1000, "priceByProduct": 2000.50, "totalOrder": 1000, "order":{
+ * "idOrder":4 } }
+ */
+
+
+

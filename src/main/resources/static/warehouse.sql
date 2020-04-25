@@ -144,25 +144,20 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 
 -----
 
---SIMPLE DATE FORMAT Java INVESTIGAR , @JsonProperty , @JsonPropertyOrder({"culo","dispatchWarehouse","quantityOut","providerProduct"}) ,	@JsonProperty("culo") // Alias Json Convencion todo minuscula. 
---AREGLAR CRUDS
---ARREGLAR FECHAS
+--SIMPLE DATE FORMAT Java INVESTIGAR , @JsonProperty , @JsonPropertyOrder({"id","dispatchWarehouse","quantityOut","providerProduct"}) ,	@JsonProperty("id") // Alias Json Convencion todo minuscula. 
+
 
 DROP TABLE BITACORA;  
-DROP TABLE BRANCH;  --CRUD LISTAR LISTO *
-DROP TABLE CATEGORY; --CRUD LISTAR LISTO *
-DROP TABLE WAREHOUSE_USER; --CRUD LISTAR LISTO *
-DROP TABLE PROVIDER; --CRUD LISTAR LISTO *
-
-
-DROP TABLE DISPATCH_DETAILS; --CRUD LISTAR LISTO , JSON OJO 
-DROP TABLE ORDER_DETAIL; --CRUD LISTAR LISTO HACER PRUEBAS
-
-
-DROP TABLE PRODUCT; --CRUD LISTAR DATE AYUDA PET
-DROP TABLE DISPATCH_BY_WAREHOUSE; --CRUD LISTAR DATE
-DROP TABLE n_Order; --CRUD LISTAR DATE
-DROP TABLE PROVIDER_BY_PRODUCT; --CRUD LISTAR DATE
+DROP TABLE BRANCH; 
+DROP TABLE CATEGORY; 
+DROP TABLE WAREHOUSE_USER; 
+DROP TABLE PROVIDER; 
+DROP TABLE DISPATCH_DETAILS;
+DROP TABLE ORDER_DETAIL;
+DROP TABLE PRODUCT; --JSON DATE FORMAT
+DROP TABLE DISPATCH_BY_WAREHOUSE; --JSON DATE FORMAT
+DROP TABLE n_Order; --JSON DATE FORMAT
+DROP TABLE PROVIDER_BY_PRODUCT; --JSON DATE FORMAT
 
 
 SELECT * FROM BRANCH;
@@ -292,7 +287,7 @@ BEGIN
     COMMIT;
 END;
 
-CALL create_product('PEPSI',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),2);
+CALL create_product('PEPSI',SYSDATE,2);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_product (pid_product IN product.id_product%TYPE, pname_product IN product.name_product%TYPE, pcreated_product IN product.created_product%TYPE,
@@ -308,7 +303,7 @@ BEGIN
     COMMIT;
 END;
 
-CALL update_product(4,'7UP',TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),2);
+CALL update_product(4,'7UP',SYSDATE,2);
 
 --DELETE
 CREATE OR REPLACE PROCEDURE delete_product (Pid_product IN product.id_product%TYPE) IS
@@ -404,11 +399,11 @@ END;
 --CREATE
 CREATE OR REPLACE PROCEDURE create_n_order(pdate_time IN n_order.date_time%TYPE, ptotal_amount IN n_order.total_amount%TYPE)AS
 BEGIN
-    INSERT INTO N_ORDER (id_order,date_time,total_amount) VALUES (sq_n_order.NEXTVAL,TO_DATE(pdate_time, 'yyyy/mm/dd hh24:mi:ss'),ptotal_amount);
+    INSERT INTO N_ORDER (id_order,date_time,total_amount) VALUES (sq_n_order.NEXTVAL,pdate_time,ptotal_amount);
     COMMIT;
 END;
 
-CALL create_n_order (TO_DATE('2020/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
+CALL create_n_order (SYSDATE,100.24);
 
 --UPDATE
 CREATE OR REPLACE PROCEDURE update_n_order (pid_order IN n_order.id_order%TYPE, pdate_time IN n_order.date_time%TYPE, ptotal_amount IN n_order.total_amount%TYPE)AS
@@ -422,7 +417,7 @@ BEGIN
     COMMIT;
 END;
 
-CALL update_n_order (3,TO_DATE('2021/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'),100.24);
+CALL update_n_order (3,SYSDATE,100.24);
 
 --DELETE
 CREATE OR REPLACE PROCEDURE delete_n_order (pid_order IN n_order.id_order%TYPE) IS
@@ -441,11 +436,11 @@ END;
 CREATE OR REPLACE PROCEDURE create_provider_by_product(plast_added IN provider_by_product.last_added%TYPE,pid_provider IN provider_by_product.id_provider%TYPE,
 pid_product IN  provider_by_product.id_product%TYPE,pid_user IN provider_by_product.id_user%TYPE,pquantity IN provider_by_product.quantity%TYPE,pprice_product IN provider_by_product.price_product%TYPE)AS
 BEGIN
-    INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (sq_provider_by_product.NEXTVAL,TO_DATE(plast_added,'yyyy/mm/dd hh24:mi:ss'),pid_provider,pid_product,pid_user,pquantity,pprice_product);
+    INSERT INTO provider_by_product (id_provider_by_product,last_added,id_provider,id_product,id_user,quantity,price_product) VALUES (sq_provider_by_product.NEXTVAL,plast_added,pid_provider,pid_product,pid_user,pquantity,pprice_product);
     COMMIT;
 END;
 
-CALL create_provider_by_product (TO_DATE('2020/04/17 20:01:43','yyyy/mm/dd hh24:mi:ss'),1,2,1,100,125.50);
+CALL create_provider_by_product (SYSDATE,1,2,1,100,125.50);
 
 --UPDATE
 
@@ -529,7 +524,7 @@ END;
 CREATE OR REPLACE PROCEDURE create_dispatch_by_warehouse(pid_branch IN dispatch_by_warehouse.id_branch%TYPE , pid_user IN dispatch_by_warehouse.id_user%TYPE ,
 plast_sent IN dispatch_by_warehouse.last_sent%TYPE)AS
 BEGIN
-    INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (sq_dispatch_by_warehouse.NEXTVAL,pid_branch,pid_user,TO_DATE(plast_sent , 'yyyy/mm/dd hh24:mi:ss'));
+    INSERT INTO DISPATCH_BY_WAREHOUSE (id_dispatch_by_warehouse,id_branch,id_user,last_sent ) VALUES (sq_dispatch_by_warehouse.NEXTVAL,pid_branch,pid_user,plast_sent);
     COMMIT;
 END;
 
@@ -549,7 +544,7 @@ BEGIN
     COMMIT;
 END;
 
-CALL update_dispatch_by_warehouse (3,1,1,TO_DATE('2022/04/17 20:01:43', 'yyyy/mm/dd hh24:mi:ss'));
+CALL update_dispatch_by_warehouse (3,1,1,SYSDATE);
 
 --DELETE
 CREATE OR REPLACE PROCEDURE delete_dispatch_by_warehouse (pid_dispatch_by_warehouse IN dispatch_by_warehouse.id_dispatch_by_warehouse%TYPE) IS

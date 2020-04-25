@@ -31,7 +31,7 @@ public class DispatchDetailController {
 		return service.list();
 	}
 	
-	// http://localhost:8090/createDispatchDetail (json  Body Raw JSON)
+	// http://localhost:8090/createDispatchDetail 
 	
 	@PostMapping(value = "/createDispatchDetail", consumes = "application/json", produces = "application/json")
 	public String addWareUsr(@RequestBody DispatchDetail detail) {
@@ -43,12 +43,15 @@ public class DispatchDetailController {
 		return "Created";
 	}	
 	
+
 	
-	// http://localhost:8090/updateDispatchDetail/id  (json  Body Raw JSON)
+	// http://localhost:8090/updateDispatchDetail/id  
 	
 	@PutMapping(value = "/updateDispatchDetail/{id}" , consumes = "application/json", produces = "application/json") 
 	public String updateWareUsr(@PathVariable Integer id,@RequestBody DispatchDetail detail) {
+		
 		service2.updateDetail(detail);
+		
 		return "Updated";
 	}
 	
@@ -63,3 +66,20 @@ public class DispatchDetailController {
 	}
 	
 }
+
+
+
+
+/*
+ * //{ CREATE // "dispatchWarehouse":{ // "idDispatchWarehouse" :2 // }, //
+ * "quantityOut": 1000, // // "providerProduct":{ // "idProviderProduct": 2 // }
+ * //}
+ */
+
+/*
+ * //{ UPDATE // "id":1, //"dispatchWarehouse":{ //
+ * "idDispatchWarehouse" :2 //}, //"quantityOut": 1000, // //"providerProduct":{
+ * // "idProviderProduct": 2 //} //}
+ */
+
+

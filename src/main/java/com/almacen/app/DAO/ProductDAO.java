@@ -22,6 +22,7 @@ import com.almacen.interfaces.IProductService;
 @Service
 public class ProductDAO implements IProductService{
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcCall call;
@@ -43,7 +44,7 @@ public class ProductDAO implements IProductService{
 				p.setNameProduct(rs.getNString("name_product"));
 				p.setCreatedProduct(rs.getDate("created_product"));
 				c.setIdCategory(rs.getLong("id_category"));
-				p.setIdCategory(c);
+				p.setCategory(c);
 				
 				return p;
 			}
@@ -62,7 +63,7 @@ public class ProductDAO implements IProductService{
 		
 		map.put("pname_product", product.getNameProduct());
 		map.put("pcreated_product", product.getCreatedProduct());
-		map.put("pid_category", product.getIdCategory());
+		map.put("pid_category", product.getCategory().getIdCategory());
 		
 		SqlParameterSource src = new MapSqlParameterSource()
 				.addValues(map);
@@ -81,7 +82,7 @@ public class ProductDAO implements IProductService{
 		map.put("pid_product", product.getIdProduct());
 		map.put("pname_product", product.getNameProduct());
 		map.put("pcreated_product", product.getCreatedProduct());
-		map.put("pid_category", product.getIdCategory());
+		map.put("pid_category", product.getCategory().getIdCategory());
 		
 		SqlParameterSource src = new MapSqlParameterSource()
 				.addValues(map);

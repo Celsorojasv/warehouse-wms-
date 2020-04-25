@@ -1,27 +1,36 @@
 package com.almacen.app.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"idOrderDetail","providerProduct","quantityIn","priceByProduct","totalOrder","order"})
 public class OrderDetail {
 
 	private Long idOrderDetail;
-	private ProviderByProduct idProviderProduct;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private ProviderByProduct providerProduct;
 	private Integer quantityIn;
 	private Double priceByProduct;
 	private Double totalOrder;
-	private Order idOrder;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Order order;
 	
-	public OrderDetail() {
+	
+	
+	public OrderDetail(Long idOrderDetail, ProviderByProduct providerProduct, Integer quantityIn, Double priceByProduct,
+			Double totalOrder, Order order) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public OrderDetail(ProviderByProduct idProviderProduct, Integer quantityIn, Double priceByProduct,
-			Double totalOrder, Order idOrder) {
-		super();
-		this.idProviderProduct = idProviderProduct;
+		this.idOrderDetail = idOrderDetail;
+		this.providerProduct = providerProduct;
 		this.quantityIn = quantityIn;
 		this.priceByProduct = priceByProduct;
 		this.totalOrder = totalOrder;
-		this.idOrder = idOrder;
+		this.order = order;
+	}
+
+	public OrderDetail() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getIdOrderDetail() {
@@ -32,12 +41,12 @@ public class OrderDetail {
 		this.idOrderDetail = idOrderDetail;
 	}
 
-	public ProviderByProduct getIdProviderProduct() {
-		return idProviderProduct;
+	public ProviderByProduct getProviderProduct() {
+		return providerProduct;
 	}
 
-	public void setIdProviderProduct(ProviderByProduct idProviderProduct) {
-		this.idProviderProduct = idProviderProduct;
+	public void setProviderProduct(ProviderByProduct providerProduct) {
+		this.providerProduct = providerProduct;
 	}
 
 	public Integer getQuantityIn() {
@@ -64,12 +73,12 @@ public class OrderDetail {
 		this.totalOrder = totalOrder;
 	}
 
-	public Order getIdOrder() {
-		return idOrder;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setIdOrder(Order idOrder) {
-		this.idOrder = idOrder;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 

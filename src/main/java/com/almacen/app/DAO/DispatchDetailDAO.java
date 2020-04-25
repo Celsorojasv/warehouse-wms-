@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.almacen.app.models.DispatchByWarehouse;
 import com.almacen.app.models.DispatchDetail;
@@ -55,6 +56,7 @@ public class DispatchDetailDAO implements IDispatchDetailsService {
 	return listDispDetail;
 	}
 
+	@Transactional
 	@Override
 	public void createDetail(DispatchDetail detail) {
 		// TODO Auto-generated method stub
@@ -74,6 +76,7 @@ public class DispatchDetailDAO implements IDispatchDetailsService {
 		
 	}
 
+	@Transactional
 	@Override
 	public void updateDetail(DispatchDetail detail) {
 		// TODO Auto-generated method stub
@@ -93,6 +96,7 @@ public class DispatchDetailDAO implements IDispatchDetailsService {
 		
 	}
 
+	@Transactional
 	@Override
 	public void deleteDetail(Integer idDetail) {
 		// TODO Auto-generated method stub

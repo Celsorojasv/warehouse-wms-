@@ -8,9 +8,9 @@ public class DispatchByWarehouse {
 
 	private Long idDispatchWarehouse;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Branch idBranch;
+	private Branch branch;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private WarehouseUser idUser;
+	private WarehouseUser warehouseUser;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date lastSend;
 	
@@ -19,10 +19,11 @@ public class DispatchByWarehouse {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DispatchByWarehouse(Branch idBranch, WarehouseUser idUser, Date lastSend) {
+	public DispatchByWarehouse(Long idDispatchWarehouse, Branch branch, WarehouseUser warehouseUser, Date lastSend) {
 		super();
-		this.idBranch = idBranch;
-		this.idUser = idUser;
+		this.idDispatchWarehouse = idDispatchWarehouse;
+		this.branch = branch;
+		this.warehouseUser = warehouseUser;
 		this.lastSend = lastSend;
 	}
 
@@ -30,24 +31,24 @@ public class DispatchByWarehouse {
 		return idDispatchWarehouse;
 	}
 
-	public void setIdDispatchWarehouse(Long dispatchWarehouse) {
-		this.idDispatchWarehouse = dispatchWarehouse;
+	public void setIdDispatchWarehouse(Long idDispatchWarehouse) {
+		this.idDispatchWarehouse = idDispatchWarehouse;
 	}
 
-	public Branch getIdBranch() {
-		return idBranch;
+	public Branch getBranch() {
+		return branch;
 	}
 
-	public void setIdBranch(Branch idBranch) {
-		this.idBranch = idBranch;
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 
-	public WarehouseUser getIdUser() {
-		return idUser;
+	public WarehouseUser getWarehouseUser() {
+		return warehouseUser;
 	}
 
-	public void setIdUser(WarehouseUser idUser) {
-		this.idUser = idUser;
+	public void setWarehouseUser(WarehouseUser warehouseUser) {
+		this.warehouseUser = warehouseUser;
 	}
 
 	public Date getLastSend() {
@@ -56,14 +57,6 @@ public class DispatchByWarehouse {
 
 	public void setLastSend(Date lastSend) {
 		this.lastSend = lastSend;
-	}
-
-	@Override
-	public String toString() {
-		return "DispatchByWarehouse [idDispatchWarehouse=" + idDispatchWarehouse + ", idBranch=" + idBranch
-				+ ", idUser=" + idUser + ", lastSend=" + lastSend + "]";
-	}
-	
-	
+	}	
 	
 }

@@ -10,11 +10,11 @@ public class ProviderByProduct {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date lastAdded;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Provider idProvider;   
+	private Provider provider;   
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Product idProduct;
+	private Product product;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private WarehouseUser idUser;
+	private WarehouseUser wUser;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer quantity;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -27,13 +27,14 @@ public class ProviderByProduct {
 	}
 
 
-	public ProviderByProduct(Date lastAdded, Provider idProvider, Product idProduct, WarehouseUser idUser,
-			Integer quantity, Double priceProduct) {
+	public ProviderByProduct(Long idProviderProduct, Date lastAdded, Provider provider, Product product,
+			WarehouseUser wUser, Integer quantity, Double priceProduct) {
 		super();
+		this.idProviderProduct = idProviderProduct;
 		this.lastAdded = lastAdded;
-		this.idProvider = idProvider;
-		this.idProduct = idProduct;
-		this.idUser = idUser;
+		this.provider = provider;
+		this.product = product;
+		this.wUser = wUser;
 		this.quantity = quantity;
 		this.priceProduct = priceProduct;
 	}
@@ -59,33 +60,33 @@ public class ProviderByProduct {
 	}
 
 
-	public Provider getIdProvider() {
-		return idProvider;
+	public Provider getProvider() {
+		return provider;
 	}
 
 
-	public void setIdProvider(Provider idProvider) {
-		this.idProvider = idProvider;
+	public void setProvider(Provider provider) {
+		this.provider = provider;
 	}
 
 
-	public Product getIdProduct() {
-		return idProduct;
+	public Product getProduct() {
+		return product;
 	}
 
 
-	public void setIdProduct(Product idProduct) {
-		this.idProduct = idProduct;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 
-	public WarehouseUser getIdUser() {
-		return idUser;
+	public WarehouseUser getwUser() {
+		return wUser;
 	}
 
 
-	public void setIdUser(WarehouseUser idUser) {
-		this.idUser = idUser;
+	public void setwUser(WarehouseUser wUser) {
+		this.wUser = wUser;
 	}
 
 
@@ -108,9 +109,6 @@ public class ProviderByProduct {
 		this.priceProduct = priceProduct;
 	}
 
-	
 
-	
-	
 	
 }

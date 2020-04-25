@@ -61,3 +61,14 @@ public class ProductController {
 	
 }
 
+/* CREATE
+ * { "nameProduct": "PIZZA", "createdProduct": "2012-04-23 25:43:51,
+ * "category":{ "idCategory":1 } }
+ */
+
+
+/* UPDATE
+ * { "idProduct":2 ,"nameProduct": "PIZZA", "createdProduct": "2012-04-23 25:43:51,
+ * "category":{ "idCategory":1 } }
+ */
+
