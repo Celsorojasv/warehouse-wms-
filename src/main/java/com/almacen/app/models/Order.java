@@ -2,9 +2,12 @@ package com.almacen.app.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Order {
 	
 	private Long idOrder;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dateTime;
 	private Double totalAmount;
 	

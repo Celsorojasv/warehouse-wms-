@@ -2,12 +2,13 @@ package com.almacen.app.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class ProviderByProduct {
 	
 	private Long idProviderProduct;
-	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date lastAdded;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Provider provider;   

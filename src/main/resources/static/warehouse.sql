@@ -144,7 +144,7 @@ ALTER TABLE warehouse_user ADD CONSTRAINT warehouse_user_pk PRIMARY KEY ( id_use
 
 -----
 
---SIMPLE DATE FORMAT Java INVESTIGAR , @JsonProperty , @JsonPropertyOrder({"id","dispatchWarehouse","quantityOut","providerProduct"}) ,	@JsonProperty("id") // Alias Json Convencion todo minuscula. 
+--@JsonFormat(pattern="yyyy-MM-dd"), @JsonProperty , @JsonPropertyOrder({"id","dispatchWarehouse","quantityOut","providerProduct"}) ,	@JsonProperty("id") // Alias Json Convencion todo minuscula. 
 
 
 DROP TABLE BITACORA;  
@@ -154,10 +154,10 @@ DROP TABLE WAREHOUSE_USER;
 DROP TABLE PROVIDER; 
 DROP TABLE DISPATCH_DETAILS;
 DROP TABLE ORDER_DETAIL;
-DROP TABLE PRODUCT; --JSON DATE FORMAT
-DROP TABLE DISPATCH_BY_WAREHOUSE; --JSON DATE FORMAT
-DROP TABLE n_Order; --JSON DATE FORMAT
-DROP TABLE PROVIDER_BY_PRODUCT; --JSON DATE FORMAT
+DROP TABLE PRODUCT; 
+DROP TABLE DISPATCH_BY_WAREHOUSE;
+DROP TABLE n_Order; 
+DROP TABLE PROVIDER_BY_PRODUCT;
 
 
 SELECT * FROM BRANCH;

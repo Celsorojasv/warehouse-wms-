@@ -2,12 +2,14 @@ package com.almacen.app.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class Product {
 	
 	private Long idProduct;
 	private String nameProduct;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date createdProduct;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Category category;
