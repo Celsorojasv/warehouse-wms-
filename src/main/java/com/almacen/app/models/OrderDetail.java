@@ -11,7 +11,6 @@ public class OrderDetail {
 	private ProviderByProduct providerProduct;
 	private Integer quantityIn;
 	private Double priceByProduct;
-	private Double totalOrder;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Order order;
 	
@@ -24,7 +23,6 @@ public class OrderDetail {
 		this.providerProduct = providerProduct;
 		this.quantityIn = quantityIn;
 		this.priceByProduct = priceByProduct;
-		this.totalOrder = totalOrder;
 		this.order = order;
 	}
 
@@ -63,14 +61,6 @@ public class OrderDetail {
 
 	public void setPriceByProduct(Double priceByProduct) {
 		this.priceByProduct = priceByProduct;
-	}
-
-	public Double getTotalOrder() {
-		return totalOrder;
-	}
-
-	public void setTotalOrder(Double totalOrder) {
-		this.totalOrder = totalOrder;
 	}
 
 	public Order getOrder() {

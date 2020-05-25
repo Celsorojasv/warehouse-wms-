@@ -51,7 +51,6 @@ public class OrderDetailDAO  implements IOrderDetailService {
 				
 				or.setQuantityIn(rs.getInt("quatity_in"));
 				or.setPriceByProduct(rs.getDouble("price_by_product"));
-				or.setTotalOrder(rs.getDouble("total_order"));
 				
 				order.setIdOrder(rs.getLong("id_order"));
 				or.setOrder(order);
@@ -76,7 +75,6 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
 		map.put("pquatity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
-		map.put("ptotal_order", orderDetail.getTotalOrder());
 		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 
 		
@@ -99,7 +97,6 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
 		map.put("pquatity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
-		map.put("ptotal_order", orderDetail.getTotalOrder());
 		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 
 		
