@@ -62,3 +62,37 @@ public class DispatchByWarehouseController {
 	}
 
 }
+
+
+// http://localhost:8090/listDisByWare
+
+
+// http://localhost:8090/createDisByWare 
+/* CREATE
+     {
+        "branch": {
+            "idBranch": 196
+        },
+        "warehouseUser": {
+            "idUser": 8
+        },
+        "lastSend": "2019-08-05"
+    }
+ */
+
+
+// http://localhost:8090/updateDisByWare/id
+/* UPDATE
+{
+   "idDispatchWarehouse": 501,
+   "branch": {
+       "idBranch": 196
+   },
+   "warehouseUser": {
+       "idUser": 8
+   },
+   "lastSend": "2019-08-05"
+}
+*/
+
+// http://localhost:8090/removeDisByWare/id

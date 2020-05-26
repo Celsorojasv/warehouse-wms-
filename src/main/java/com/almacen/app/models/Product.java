@@ -9,7 +9,7 @@ public class Product {
 	
 	private Long idProduct;
 	private String nameProduct;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="DD-MM-YYYY")
 	private Date createdProduct;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Category category;

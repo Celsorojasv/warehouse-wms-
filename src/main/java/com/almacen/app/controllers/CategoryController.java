@@ -60,3 +60,27 @@ public class CategoryController {
 	}
 	
 }
+
+// http://localhost:8090/listCategory
+
+// http://localhost:8090/createCategory
+
+/*
+{
+    "nameCategory": "CREATE PRUEBA",
+    "descriptionCategory": "548-757-1014"
+}
+*/
+
+//http://localhost:8090/updateCategory/id
+
+/*
+{
+    "idCategory": 30,
+    "nameCategory": "6 Dawn Center",
+    "descriptionCategory": "548-757-1014"
+}
+*/
+
+
+// http://localhost:8090/removeCategory/{id}

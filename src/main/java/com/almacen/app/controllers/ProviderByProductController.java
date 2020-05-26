@@ -64,3 +64,48 @@ public class ProviderByProductController {
 	}
 	
 }
+
+
+// http://localhost:8090/listProvByProduct
+
+// http://localhost:8090/createProByP 
+/* CREATE
+ {
+    {
+        "lastAdded": "320-11-2018",
+        "provider": {
+            "idProvider": 55
+        },
+        "product": {
+            "idProduct": 778
+        },
+        "wUser": {
+            "idUser": 2
+        },
+        "quantity": 8846,
+        "priceProduct": 748.6
+    }
+*/
+
+//http://localhost:8090/updateProByP/{id} 
+/* UPDATE
+    {
+        "idProviderProduct": 1001,
+        "lastAdded": "29-11-2018",
+        "provider": {
+            "idProvider": 55
+        },
+        "product": {
+            "idProduct": 778
+        },
+        "wUser": {
+            "idUser": 2
+        },
+        "quantity": 8846,
+        "priceProduct": 748.6
+    }
+*/
+
+
+// http://localhost:8090/removeProByP/{id}
+

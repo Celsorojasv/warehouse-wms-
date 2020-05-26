@@ -59,3 +59,32 @@ public class ProviderController {
 	}
 
 }
+
+
+// http://localhost:8090/listProvider
+
+
+//http://localhost:8090/createProvider
+/*CREATE
+{
+    "nameProvider": "Edgewire",
+    "nitProvider": "696-60-4829",
+    "phoneProvider": "517-956-3289",
+    "addressProvider": "90350 Rowland Plaza"
+}
+*/
+
+
+//http://localhost:8090/updateProvider/id 
+/* UPDATE 
+{
+    "idProvider": 101,
+    "nameProvider": "UPDATE TEST",
+    "nitProvider": "696-60-4829",
+    "phoneProvider": "517-956-3289",
+    "addressProvider": "90350 Rowland Plaza"
+}
+*/
+
+
+//http://localhost:8090/removeProvider/{id}

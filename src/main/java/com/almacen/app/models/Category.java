@@ -49,8 +49,6 @@ public class Category {
 	public void setDescriptionCategory(String descriptionCategory) {
 		this.descriptionCategory = descriptionCategory;
 	}
-	
-
 
 	
 }

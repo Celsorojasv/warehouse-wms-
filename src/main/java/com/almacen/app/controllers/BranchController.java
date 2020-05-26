@@ -60,3 +60,39 @@ public class BranchController {
 	}
 	
 }
+
+
+// http://localhost:8090/listBranch
+
+
+// http://localhost:8090/createBranch 
+
+/*
+    {
+        "nameBranch": "TEST1-Lesch",
+        "addressBranch": "6 Dawn Center",
+        "phoneBranch": "548-757-1014"
+    }
+
+*/
+
+
+// http://localhost:8090/removeBranch/{id}
+
+/*
+*
+    {
+        "idBranch": 447,
+        "nameBranch": "TEST UPDATE",
+        "addressBranch": "6 Dawn Center",
+        "phoneBranch": "548-757-1014"
+    }
+*/
+
+// http://localhost:8090/removeBranch/{id}
+
+
+
+
+
+

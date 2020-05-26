@@ -98,7 +98,7 @@ public class ProviderByProductDAO implements IProviderByProductService{
 		//pid_provider_by_product,plast_added,pid_provider,pid_product,pid_user,pquantity,pprice_product
 
 		
-		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_provider_by_product");
+		call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("update_provider_by_product");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pid_provider_by_product", ProByP.getIdProviderProduct());

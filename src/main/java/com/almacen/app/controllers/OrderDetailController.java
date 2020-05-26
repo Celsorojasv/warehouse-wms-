@@ -64,18 +64,37 @@ public class OrderDetailController {
 
 }
 
+// http://localhost:8090/listOrderDetail
 
-
-/*
- * { CREATE "providerProduct":{ "idProviderProduct":2 }, "quantityIn": 1000,
- * "priceByProduct": 1000.50, "totalOrder": 1000, "order":{ "idOrder":4 } }
+//http://localhost:8090/createOrderDetail
+/* CREATE
+    {
+        "providerProduct": {
+            "idProviderProduct": 176
+        },
+        "quantityIn": 3543,
+        "priceByProduct": 114.04,
+        "order": {
+            "idOrder": 219
+        }
+    }
  */
 
-/*
- * { "idOrderDetail":1, "providerProduct":{ "idProviderProduct":2 },
- * "quantityIn": 1000, "priceByProduct": 2000.50, "totalOrder": 1000, "order":{
- * "idOrder":4 } }
+//http://localhost:8090/updateOrderDetail/id
+/*UPDATE
+    {
+        "idOrderDetail": 501,
+        "providerProduct": {
+            "idProviderProduct": 176
+        },
+        "quantityIn": 3543,
+        "priceByProduct": 114.04,
+        "order": {
+            "idOrder": 219
+        }
+    }
  */
 
+// http://localhost:8090/removeOrderDetail/{id}
 
 

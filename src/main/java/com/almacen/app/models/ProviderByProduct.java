@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class ProviderByProduct {
 	
 	private Long idProviderProduct;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="DD-MM-YYYY")
 	private Date lastAdded;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Provider provider;   

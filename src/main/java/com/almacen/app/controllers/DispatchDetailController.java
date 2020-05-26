@@ -67,19 +67,36 @@ public class DispatchDetailController {
 	
 }
 
+// http://localhost:8090/listDispatchDetail
 
 
 
-/*
- * //{ CREATE // "dispatchWarehouse":{ // "idDispatchWarehouse" :2 // }, //
- * "quantityOut": 1000, // // "providerProduct":{ // "idProviderProduct": 2 // }
- * //}
- */
+// http://localhost:8090/createDispatchDetail 
+/* CREATE
+    {
+        "dispatchWarehouse": {
+            "idDispatchWarehouse": 210
+        },
+        "quantityOut": 100,
+        "providerProduct": {
+            "idProviderProduct": 778
+        }
+    }
+*/
 
-/*
- * //{ UPDATE // "id":1, //"dispatchWarehouse":{ //
- * "idDispatchWarehouse" :2 //}, //"quantityOut": 1000, // //"providerProduct":{
- * // "idProviderProduct": 2 //} //}
- */
+//http://localhost:8090/updateDispatchDetail/id  
+/* UPDATE
+{
+    "id": 1,
+    "dispatchWarehouse": {
+        "idDispatchWarehouse": 210
+    },
+    "quantityOut": 100,
+    "providerProduct": {
+        "idProviderProduct": 778
+    }
+}
+*/
 
+//http://localhost:8090/removeDispatchDetail/{id}
 

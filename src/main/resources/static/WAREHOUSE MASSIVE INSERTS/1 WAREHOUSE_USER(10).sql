@@ -1,0 +1,10 @@
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (1, 'Karl Calcraft', '287-306-3425', 'Senior Editor');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (2, 'Xaviera Bilsford', '684-698-5887', 'Research Associate');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (3, 'Jason Madle', '108-181-6105', 'Sales Representative');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (4, 'Alta Veschambes', '850-670-5607', 'Assistant Professor');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (5, 'Dyna Farherty', '377-571-3257', 'Geologist III');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (6, 'Norah Drife', '843-298-7339', 'Senior Developer');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (7, 'Bellina Northleigh', '206-446-7401', 'Research Associate');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (8, 'Kaela Isgar', '605-472-7895', 'Account Coordinator');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (9, 'Stevena Byrd', '488-674-5254', 'Developer I');
+insert into WAREHOUSE_USER (ID_USER, NAME_USER, PHONE_USER, JOB_TITLE) values (10, 'Yelena Stepney', '837-334-2243', 'Human Resources Assistant III');

@@ -31,7 +31,7 @@ public class OrderDetailDAO  implements IOrderDetailService {
 	 public List<OrderDetail> list(){
 		 
 		 
-		 String sql = "SELECT * FROM order_detail";
+		 String sql = "SELECT * FROM ORDER_DETAIL";
 		//Crear Vista para evitar los Nulls en el postman
 		 
 		 List<OrderDetail> listOrderDetail = jdbcTemplate.query(sql, new RowMapper<OrderDetail>() {
@@ -49,7 +49,7 @@ public class OrderDetailDAO  implements IOrderDetailService {
 				py.setIdProviderProduct(rs.getLong("id_provider_by_product"));				
 				or.setProviderProduct(py);
 				
-				or.setQuantityIn(rs.getInt("quatity_in"));
+				or.setQuantityIn(rs.getInt("quantity_in"));
 				or.setPriceByProduct(rs.getDouble("price_by_product"));
 				
 				order.setIdOrder(rs.getLong("id_order"));
@@ -73,7 +73,7 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
-		map.put("pquatity_in", orderDetail.getQuantityIn());
+		map.put("pquantity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
 		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 
@@ -95,7 +95,7 @@ public class OrderDetailDAO  implements IOrderDetailService {
 		
 		map.put("pid_detail", orderDetail.getIdOrderDetail());
 		map.put("pid_provider_by_product", orderDetail.getProviderProduct().getIdProviderProduct());
-		map.put("pquatity_in", orderDetail.getQuantityIn());
+		map.put("pquantity_in", orderDetail.getQuantityIn());
 		map.put("pprice_by_product", orderDetail.getPriceByProduct());
 		map.put("pid_order", orderDetail.getOrder().getIdOrder());
 

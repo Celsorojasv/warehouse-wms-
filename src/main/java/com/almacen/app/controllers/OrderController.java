@@ -66,4 +66,24 @@ public class OrderController {
 	
 }
 
+// http://localhost:8090/listOrders
+
+// http://localhost:8090/createOrder 
+/* CREATE
+     {
+        "dateTime": "2019-04-10",
+        "totalAmount": 0.0
+    }
+*/
+
+//http://localhost:8090/updateOrder/id 
+/* UPDATE
+{
+   "idOrder": 501,
+   "dateTime": "2019-04-10",
+   "totalAmount": 0.0
+}
+*/
+
+// http://localhost:8090/removeOrder/{id}
 

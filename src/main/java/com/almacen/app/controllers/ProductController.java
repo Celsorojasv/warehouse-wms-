@@ -61,14 +61,31 @@ public class ProductController {
 	
 }
 
+
+// http://localhost:8090/listProduct
+
+
 /* CREATE
- * { "nameProduct": "PIZZA", "createdProduct": "2012-04-23 25:43:51,
- * "category":{ "idCategory":1 } }
+ {
+        "nameProduct": "Potatoes - Peeled",
+        "createdProduct": "2018-09-24",
+        "category": {
+            "idCategory": 31
+    			    }
+}
  */
 
 
 /* UPDATE
- * { "idProduct":2 ,"nameProduct": "PIZZA", "createdProduct": "2012-04-23 25:43:51,
- * "category":{ "idCategory":1 } }
+ {
+        "idProduct": 1003,
+        "nameProduct": "UPDATE TEST",
+        "createdProduct": "2018-09-24",
+        "category": {
+            "idCategory": 29
+    			    }
+}
  */
+
+// http://localhost:8090/removeProduct/
 
