@@ -20,7 +20,7 @@ ON DISPATCH_DETAILS FOR EACH ROW
 DECLARE
     current_qty INTEGER;
 BEGIN
-    SELECT quantity INTO current_qty FROM provider_by_product where id_provider_by_product = :new.id_provider_by_product;
+    current_qty := FETCH_QUANTITY(:new.id_provider_by_product);
     IF (current_qty > :new.quantity_out) then
         UPDATE provider_by_product SET quantity = quantity - :new.quantity_out WHERE id_provider_by_product = :new.id_provider_by_product;
     ELSE 
@@ -29,6 +29,12 @@ BEGIN
     END IF;
 END;
 
+CREATE OR REPLACE FUNCTION FETCH_QUANTITY(IDPR IN NUMBER) RETURN NUMBER IS
+    F_QUANTITY INTEGER;
+BEGIN
+    SELECT quantity INTO F_QUANTITY FROM provider_by_product where id_provider_by_product = IDPR;
+    RETURN F_QUANTITY;
+END;
 
 SELECT dby.last_sent, dd.id_dispatch_by_warehouse, dd.quantity_out, pbp.quantity, pbp.id_provider_by_product FROM dispatch_by_warehouse dby INNER JOIN dispatch_details DD ON dby.id_dispatch_by_warehouse = dd.id_dispatch_by_warehouse
 INNER JOIN provider_by_product PBP 
