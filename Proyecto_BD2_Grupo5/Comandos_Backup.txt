@@ -1,0 +1,47 @@
+//Comprabamos la version de java 
+# java -jar
+
+//Se establece la variable de entorno
+# export CLASSPATH=.:${ORACLE_HOME}/jdbc/lib/ojdbc6.jar
+
+//Creamos la carpeta donde se alojara el backup
+#  mkdir /backup
+
+//Se asignan todos los permisos a la carpeta creada
+# chmod 777 /backup
+
+//Creacion de dos ficheros log y se le asignan permisos ya que Oracle debe escribir en el fichero log-backup
+#  touch /backup/log-aplicacion.log
+#  touch /backup/log-backup.log
+# chmod 777 /backup/log-backup.log
+
+// Se crea el script y se le asignan permisos de ejecución
+#  touch /backup/backup.sh
+#  chmod +x /backup/backup.sh
+
+//Se abre el la configuracion del script
+# nano backup.sh
+
+//Valores del script
+#!/bin/bash
+export CLASSPATH=.:${ORACLE_HOME}/jdbc/lib/ojdbc6.jar
+cd /u01/app/oracle/product/11.2.0/xe/apex/utilities
+## ejecuta backup de la App 100 
+java oracle/apex/APEXExport -db localhost:1521:xe -user usuario -password clave 
+-applicationid 100 >> /backup/log-aplicacion.log
+##  copia el archivo generado de la aplicación a la carpeta backup
+cp /u01/app/oracle/product/11.2.0/xe/apex/utilities/f*.sql /backup/
+## Backup completo de la BD
+su - oracle -c 'exp system/system file=/backup/backup.dmp log=/backup/log-backup.log  OWNER=GEXTIC'
+## Se crea una carpeta con la fecha actual y se copian los ficheros dentro de ella
+carpeta=$(date +"%d_%m_%y")
+mkdir /backup/$carpeta
+cp /backup/f*.sql  /backup/$carpeta
+cp /backup/backup.dmp /backup/$carpeta
+
+//Se abre crontab
+# crontab -e
+
+//Se programa la ejecucion del script
+m   h   dom   mon   dow     command
+59 23   *      *     *      root/backup/backup.sh
