@@ -1,19 +1,12 @@
 package com.almacen.app.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"id","dispatchWarehouse","quantityOut","providerProduct"})
 public class DispatchDetail {
 
-	@JsonProperty("id") // Alias Json Convencion todo minuscula. 
 	private Long idDispatch;
-	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private DispatchByWarehouse dispatchWarehouse;
 	private Integer quantityOut;
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private ProviderByProduct providerProduct;
+ 	private ProviderByProduct providerProduct;
 	
 	public DispatchDetail() {
 		super();

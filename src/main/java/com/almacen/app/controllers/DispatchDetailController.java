@@ -11,16 +11,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.almacen.app.DAO.DispatchDetailDAO;
 import com.almacen.app.models.DispatchDetail;
 import com.almacen.interfaces.IDispatchDetailsService;
 
 @RestController
 public class DispatchDetailController {
 
-	@Autowired
-	private DispatchDetailDAO service;
-	
+
 	@Autowired
 	private IDispatchDetailsService service2;
 	
@@ -28,7 +25,8 @@ public class DispatchDetailController {
 	
 	@GetMapping("/listDispatchDetail")
 	public List<DispatchDetail> dispatchDetail(){
-		return service.list();
+		System.out.println(service2.list().size());
+		return service2.list();
 	}
 	
 	// http://localhost:8090/createDispatchDetail 

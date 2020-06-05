@@ -28,13 +28,14 @@ public class DispatchDetailDAO implements IDispatchDetailsService {
 	
 	private SimpleJdbcCall call;
 
-	String sql = "SELECT * FROM DISPATCH_DETAILS";
-
+	@Transactional(readOnly = true)
+	@Override
 	public List<DispatchDetail> list(){
 		
+		String sql = "SELECT * FROM DISPATCH_DETAILS";
+		
 		List<DispatchDetail> listDispDetail = jdbcTemplate.query(sql, new RowMapper<DispatchDetail>() {
-
-			@Override
+			
 			public DispatchDetail mapRow(ResultSet rs, int rowNum) throws SQLException {
 				// TODO Auto-generated method stub
 				
@@ -48,6 +49,10 @@ public class DispatchDetailDAO implements IDispatchDetailsService {
 				d.setQuantityOut(rs.getInt("quantity_out"));
 				py.setIdProviderProduct(rs.getLong("id_provider_by_product"));
 				d.setProviderProduct(py);
+				
+				System.out.println(rs.getFetchSize());
+				System.out.println(rowNum);
+
 				
 				return d;
 			}
